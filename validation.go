@@ -12,7 +12,7 @@ import (
 	"unicode"
 
 	"github.com/fcavani/e"
-	uni "github.com/fcavani/util/unicode"
+	uni "github.com/fcavani/unicode"
 	"github.com/golang/exp/utf8string"
 )
 
