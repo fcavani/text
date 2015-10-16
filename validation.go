@@ -13,7 +13,7 @@ import (
 
 	"github.com/fcavani/e"
 	uni "github.com/fcavani/unicode"
-	"github.com/golang/exp/utf8string"
+	"golang.org/x/exp/utf8string"
 )
 
 var MinPassLen = 8
