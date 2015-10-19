@@ -93,15 +93,17 @@ func CheckPassword(pass string, min, max int) error {
 	return nil
 }
 
+var reMail *regexp.Regexp
+
+func init() {
+	reMail = regexp.MustCompile(`([a-zA-Z0-9]+)([.-_][a-zA-Z0-9]+)*@([a-zA-Z0-9]+)([.-_][a-zA-Z0-9]+)*`)
+}
+
 func CheckEmail(email string) error {
 	if len(email) < MinEmailLen || len(email) > MaxEmailLen {
 		return e.New(ErrInvEmailLength)
 	}
-	r, err := regexp.Compile(`([a-zA-Z0-9]+)([.-_][a-zA-Z0-9]+)*@([a-zA-Z0-9]+)([.-_][a-zA-Z0-9]+)*`)
-	if err != nil {
-		return e.Push(e.New(err), ErrCantCheckEmail)
-	}
-	if email != r.FindString(email) {
+	if email != reMail.FindString(email) {
 		return e.New(ErrInvEmailString)
 	}
 	return nil
@@ -151,7 +153,6 @@ func ValidateRedirect(redirect string, min, max int) error {
 	}
 	for _, s := range utf8name.Slice(1, len) {
 		if !uni.IsLetter(s) && !unicode.IsDigit(s) && s != '/' && s != '-' && s != '_' && s != '?' && s != '&' && s != '=' && s != '%' && s != '*' && s != '+' && s != ' ' && s != ',' {
-			println("redirect:", string([]byte{byte(s)}))
 			return e.Push(e.New("the character '%v' in redirect is invalid", string([]byte{byte(s)})), e.New("invalid redirect"))
 		}
 	}
