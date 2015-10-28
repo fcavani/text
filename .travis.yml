@@ -1,7 +1,9 @@
 language: go
-go: 
+go:
  - release
  - tip
-
+matrix:
+  allow_failures:
+    - go: tip
 script:
  - go test -v -timeout=15s ./...
