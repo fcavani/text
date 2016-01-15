@@ -138,7 +138,7 @@ func CheckFileName(nome string, min, max int) error {
 		return e.New(ErrInvNumberChars)
 	}
 	for _, v := range nome {
-		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != ' ' && v != '-' && v != ':' && v != ',' && v != '.' && v != '_'  && v != '/'  && v != '\'{
+		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != ' ' && v != '-' && v != ':' && v != ',' && v != '.' && v != '_' && v != '/' && v != '\\' {
 			return e.Push(e.New(ErrInvCharacter), e.New("the character '%v' in filename is invalid", string([]byte{byte(v)})))
 		}
 	}
