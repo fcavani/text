@@ -212,3 +212,15 @@ func CheckDomain(domain string) error {
 	}
 	return nil
 }
+
+func CheckUuid(text string) error {
+	if len(text) != 36 {
+		return e.New(ErrInvNumberChars)
+	}
+	for _, v := range text {
+		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != '-' {
+			return e.Push(e.New(ErrInvCharacter), e.New("the character '%v' is invalid", string([]byte{byte(v)})))
+		}
+	}
+	return nil
+}
