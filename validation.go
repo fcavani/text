@@ -213,6 +213,15 @@ func CheckDomain(domain string) error {
 	return nil
 }
 
+func CheckHostName(name string) error {
+	for _, v := range name {
+		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != '.' && v != ':' && v != '[' && v != ']' {
+			return e.Push(e.New("invalid host name"), e.New("the character '%v' in redirect is invalid", string([]byte{byte(v)})))
+		}
+	}
+	return nil
+}
+
 func CheckUuid(text string) error {
 	if len(text) != 36 {
 		return e.New(ErrInvNumberChars)
