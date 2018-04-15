@@ -22,7 +22,7 @@ var MinEmailLen = 6
 var MaxEmailLen = 60
 
 const ErrInvLengthNumber = "wrong number of digits"
-const ErrInvDigit = "caracter isn't a digit"
+const ErrInvDigit = "character isn't a digit"
 const ErrInvNumberChars = "invalid number of characters"
 const ErrInvCharacter = "invalid character"
 const ErrInvalidPassLength = "password length is invalid"
@@ -114,7 +114,8 @@ func CheckName(name string, min, max int) error {
 		return e.New(ErrInvNumberChars)
 	}
 	for _, v := range name {
-		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != ' ' && v != '`' && v != '~' && v != '!' && v != '@' && v != '#' && v != '$' && v != '%' && v != '^' && v != '&' && v != '*' && v != '(' && v != ')' && v != '_' && v != '-' && v != '+' && v != '=' && v != '{' && v != '}' && v != '[' && v != ']' && v != '|' && v != '\\' && v != ':' && v != ';' && v != '"' && v != '\'' && v != '?' && v != '/' && v != ',' && v != '.' {
+		//if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != ' ' && v != '`' && v != '~' && v != '!' && v != '@' && v != '#' && v != '$' && v != '%' && v != '^' && v != '&' && v != '*' && v != '(' && v != ')' && v != '_' && v != '-' && v != '+' && v != '=' && v != '{' && v != '}' && v != '[' && v != ']' && v != '|' && v != '\\' && v != ':' && v != ';' && v != '"' && v != '\'' && v != '?' && v != '/' && v != ',' && v != '.' {
+		if !unicode.IsGraphic(v) {
 			return e.Push(e.New(ErrInvCharacter), e.New("the character '%v' is invalid", string([]byte{byte(v)})))
 		}
 	}
