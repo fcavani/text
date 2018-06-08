@@ -207,7 +207,7 @@ func CleanUrl(rawurl string, min, max int) (string, error) {
 
 func CheckDomain(domain string) error {
 	for _, v := range domain {
-		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != '.' {
+		if !uni.IsLetter(v) && !unicode.IsDigit(v) && v != '.' && v != ':' && v != '-' && v != '_' {
 			return e.Push(e.New("invalid domain name"), e.New("the character '%v' in redirect is invalid", string([]byte{byte(v)})))
 		}
 	}
