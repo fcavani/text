@@ -1,10 +1,13 @@
 language: go
 go:
--  1.8.*
- - "1.10.*"
+ - "1.11.x"
  - tip
 matrix:
   allow_failures:
     - go: tip
+env:
+  GO111MODULE=on
+install:
+  go mod download
 script:
  - go test -v -timeout=15s ./...
